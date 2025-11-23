@@ -1,0 +1,12 @@
+[project]
+name = "mcp-statscan"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=1.22.0",
+    "pydantic>=2.12.4",
+    "requests>=2.32.5",
+]
