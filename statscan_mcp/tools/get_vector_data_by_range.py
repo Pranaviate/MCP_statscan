@@ -2,7 +2,7 @@ import httpx
 
 BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
 
-async def get_series_by_vector(
+async def get_vector_data_by_range(
         vector_id: int,
         start_date: str,
         end_date: str
