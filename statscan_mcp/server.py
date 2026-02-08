@@ -11,6 +11,10 @@ from statscan_mcp.tools.get_changed_cubes import get_changed_cubes
 from statscan_mcp.tools.get_changed_series import get_changed_series
 from statscan_mcp.tools.get_changed_vector_data import get_changed_vector_data
 from statscan_mcp.tools.get_changed_series_data import get_changed_series_data
+from statscan_mcp.tools.get_vectors_latest import get_vectors_latest
+from statscan_mcp.tools.get_bulk_vectors import get_bulk_vectors
+from statscan_mcp.tools.get_full_table_csv import get_full_table_csv
+from statscan_mcp.tools.get_full_table_sdmx import get_full_table_sdmx
 
 
 mcp = FastMCP("statscan")
@@ -31,6 +35,10 @@ mcp.tool()(get_changed_cubes)
 mcp.tool()(get_changed_series)
 mcp.tool()(get_changed_vector_data)
 mcp.tool()(get_changed_series_data)
+mcp.tool()(get_vectors_latest)
+mcp.tool()(get_bulk_vectors)
+mcp.tool()(get_full_table_csv)
+mcp.tool()(get_full_table_sdmx)
 
 def main():
     mcp.run()
