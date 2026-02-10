@@ -1,7 +1,7 @@
-import httpx
 from typing import Optional
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
 
 
 async def get_full_table_csv(product_id: int, language: Optional[str] = "en") -> dict:
@@ -14,15 +14,4 @@ async def get_full_table_csv(product_id: int, language: Optional[str] = "en") ->
     :param language: Language code - "en" for English or "fr" for French (default: "en")
     :return: Dictionary with download URL or error details
     """
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{BASE_URL}/getFullTableDownloadCSV/{product_id}/{language}"
-            )
-            data = response.json()
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to get CSV download URL from StatsCan API"
-        }
+    return await client.get(f"getFullTableDownloadCSV/{product_id}/{language}")

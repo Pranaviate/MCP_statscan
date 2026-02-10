@@ -1,6 +1,7 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
+
 
 async def get_table(product_id: int, coordinate: str, latest_n: int) -> dict:
     """
@@ -13,13 +14,4 @@ async def get_table(product_id: int, coordinate: str, latest_n: int) -> dict:
     :param latest_n: Number of latest periods to retrieve
     :return: Dictionary with table data or error details
     """
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(f"{BASE_URL}/getDataFromCubePidCoordAndLatestNPeriods", json=[{"productId": product_id, "coordinate": coordinate, "latestN": latest_n}])
-            data = response.json()
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch table data from StatsCan API"
-        }
+    return await client.post("getDataFromCubePidCoordAndLatestNPeriods", [{"productId": product_id, "coordinate": coordinate, "latestN": latest_n}])

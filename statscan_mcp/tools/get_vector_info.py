@@ -1,10 +1,9 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
 
-async def get_vector_info(
-        vector_id: int,
-) -> dict:
+
+async def get_vector_info(vector_id: int) -> dict:
     """
     Get metadata for a specific Statistics Canada vector.
 
@@ -16,18 +15,4 @@ async def get_vector_info(
     :return: Dictionary with vector metadata or error details
     :rtype: dict
     """
-
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(
-                f"{BASE_URL}/getSeriesInfoFromVector",
-                json=[{"vectorId": vector_id}]
-            )
-            data = response.json()
-
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch vector data from StatsCan API"
-        }
+    return await client.post("getSeriesInfoFromVector", [{"vectorId": vector_id}])

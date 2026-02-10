@@ -1,6 +1,7 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
+
 
 async def get_cube_metadata(product_id: int) -> dict:
     """
@@ -13,14 +14,4 @@ async def get_cube_metadata(product_id: int) -> dict:
     :return: Dictionary with cube metadata or error details
     :rtype: dict
     """
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(f"{BASE_URL}/getCubeMetadata", json=[{"productId": product_id}])
-            data = response.json()
-
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch cube metadata from StatsCan API"
-        }
+    return await client.post("getCubeMetadata", [{"productId": product_id}])

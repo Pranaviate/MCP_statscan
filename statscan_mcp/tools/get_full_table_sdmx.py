@@ -1,6 +1,6 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
 
 
 async def get_full_table_sdmx(product_id: int) -> dict:
@@ -14,15 +14,4 @@ async def get_full_table_sdmx(product_id: int) -> dict:
     :param product_id: The StatsCan product/cube ID (e.g., 14100287)
     :return: Dictionary with download URL or error details
     """
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{BASE_URL}/getFullTableDownloadSDMX/{product_id}"
-            )
-            data = response.json()
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to get SDMX download URL from StatsCan API"
-        }
+    return await client.get(f"getFullTableDownloadSDMX/{product_id}")

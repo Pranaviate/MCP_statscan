@@ -1,12 +1,9 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
 
-async def get_vector_data_by_range(
-        vector_id: int,
-        start_date: str,
-        end_date: str
-) -> dict:
+
+async def get_vector_data_by_range(vector_id: int, start_date: str, end_date: str) -> dict:
     """
     Fetch time series data for a specific Statistics Canada vector.
 
@@ -21,24 +18,9 @@ async def get_vector_data_by_range(
     :return: Dictionary with time series data or error details
     :rtype: dict
     """
-
-    try:
-        params = {
-            "vectorIds": f'"{vector_id}"',
-            "startRefPeriod": start_date,
-            "endReferencePeriod": end_date
-        }
-
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{BASE_URL}/getDataFromVectorByReferencePeriodRange",
-                params=params
-            )
-            data = response.json()
-
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch vector data from StatsCan API"
-        }
+    params = {
+        "vectorIds": f'"{vector_id}"',
+        "startRefPeriod": start_date,
+        "endReferencePeriod": end_date
+    }
+    return await client.get("getDataFromVectorByReferencePeriodRange", params=params)

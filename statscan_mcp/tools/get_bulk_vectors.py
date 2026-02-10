@@ -1,7 +1,7 @@
-import httpx
 from typing import List
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
 
 
 async def get_bulk_vectors(
@@ -19,23 +19,9 @@ async def get_bulk_vectors(
     :param end_release_date: End datetime in ISO format (e.g., "2018-03-31T19:00")
     :return: Dictionary with bulk vector data or error details
     """
-    try:
-        # Note: This endpoint uses object body format, not array
-        request_body = {
-            "vectorIds": [str(vid) for vid in vector_ids],
-            "startDataPointReleaseDate": start_release_date,
-            "endDataPointReleaseDate": end_release_date
-        }
-
-        async with httpx.AsyncClient() as client:
-            response = await client.post(
-                f"{BASE_URL}/getBulkVectorDataByRange",
-                json=request_body
-            )
-            data = response.json()
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch bulk vector data from StatsCan API"
-        }
+    request_body = {
+        "vectorIds": [str(vid) for vid in vector_ids],
+        "startDataPointReleaseDate": start_release_date,
+        "endDataPointReleaseDate": end_release_date
+    }
+    return await client.post("getBulkVectorDataByRange", request_body)

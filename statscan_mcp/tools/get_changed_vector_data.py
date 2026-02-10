@@ -1,6 +1,6 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
 
 
 async def get_changed_vector_data(vector_id: int) -> dict:
@@ -12,16 +12,4 @@ async def get_changed_vector_data(vector_id: int) -> dict:
     :param vector_id: The vector ID number (e.g., 32164132)
     :return: Dictionary with changed vector data or error details
     """
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(
-                f"{BASE_URL}/getChangedSeriesDataFromVector",
-                json=[{"vectorId": vector_id}]
-            )
-            data = response.json()
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch changed vector data from StatsCan API"
-        }
+    return await client.post("getChangedSeriesDataFromVector", [{"vectorId": vector_id}])

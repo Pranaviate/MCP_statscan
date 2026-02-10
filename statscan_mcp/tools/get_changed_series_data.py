@@ -1,6 +1,6 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
+client = WDSClient()
 
 
 async def get_changed_series_data(product_id: int, coordinate: str) -> dict:
@@ -14,16 +14,4 @@ async def get_changed_series_data(product_id: int, coordinate: str) -> dict:
     :param coordinate: Dimension coordinate string (e.g., "1.12.0.0.0.0.0.0.0.0")
     :return: Dictionary with changed series data or error details
     """
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(
-                f"{BASE_URL}/getChangedSeriesDataFromCubePidCoord",
-                json=[{"productId": product_id, "coordinate": coordinate}]
-            )
-            data = response.json()
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch changed series data from StatsCan API"
-        }
+    return await client.post("getChangedSeriesDataFromCubePidCoord", [{"productId": product_id, "coordinate": coordinate}])

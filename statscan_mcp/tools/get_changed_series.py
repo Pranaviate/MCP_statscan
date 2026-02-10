@@ -1,7 +1,6 @@
-import httpx
+from statscan_mcp.providers.wds_client import WDSClient
 
-BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
-
+client = WDSClient()
 
 async def get_changed_series() -> dict:
     """
@@ -12,13 +11,4 @@ async def get_changed_series() -> dict:
 
     :return: Dictionary with list of changed series or error details
     """
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(f"{BASE_URL}/getChangedSeriesList")
-            data = response.json()
-        return data
-    except Exception as e:
-        return {
-            "error": str(e),
-            "hint": "Failed to fetch changed series from StatsCan API"
-        }
+    return await client.get(endpoint="getChangedSeriesList", params=None)
