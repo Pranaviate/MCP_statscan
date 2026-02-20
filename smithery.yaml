@@ -1,0 +1,6 @@
+runtime: container
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    properties: {}

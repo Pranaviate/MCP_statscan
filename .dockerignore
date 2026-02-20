@@ -1,0 +1,9 @@
+.git
+.venv
+__pycache__
+tests/
+LOCAL_*
+devlog.md
+*_plan.md
+*.pyc
+.pytest_cache

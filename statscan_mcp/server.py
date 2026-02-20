@@ -1,3 +1,5 @@
+import os
+
 from mcp.server.fastmcp import FastMCP
 
 from statscan_mcp.tools.list_cubes import list_cubes
@@ -19,11 +21,6 @@ from statscan_mcp.tools.get_full_table_sdmx import get_full_table_sdmx
 
 mcp = FastMCP("statscan")
 
-@mcp.tool()
-def greet(name: str) -> str:
-    "Say hello to someone"
-    return f"Hello, {name}! Welcome to StatsCan MCP server!"
-
 mcp.tool()(list_cubes)
 mcp.tool()(list_cubes_full)
 mcp.tool()(get_cube_metadata)
@@ -41,4 +38,23 @@ mcp.tool()(get_full_table_csv)
 mcp.tool()(get_full_table_sdmx)
 
 def main():
-    mcp.run()
+    transport = os.environ.get("TRANSPORT", "stdio")
+
+    if transport == "http":
+        from starlette.middleware.cors import CORSMiddleware
+
+        app = mcp.streamable_http_app()
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_methods=["*"],
+            allow_headers=["*"],
+            expose_headers=["mcp-session-id"],
+        )
+
+        import uvicorn
+
+        port = int(os.environ.get("PORT", 8080))
+        uvicorn.run(app, host="0.0.0.0", port=port)
+    else:
+        mcp.run()
