@@ -3,7 +3,7 @@ FROM ghcr.io/astral-sh/uv:python3.11-alpine
 WORKDIR /app
 
 # Install dependencies first (layer cache)
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock README.md ./
 RUN uv sync --no-dev --frozen
 
 # Copy source code
