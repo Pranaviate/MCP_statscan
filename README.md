@@ -1,5 +1,5 @@
 ---
-title: Statscan Mcp
+title: Statscan Mcp Server
 emoji: 📊
 colorFrom: red
 colorTo: blue
