@@ -1,3 +1,12 @@
+---
+title: Statscan Mcp
+emoji: 📊
+colorFrom: red
+colorTo: blue
+sdk: docker
+pinned: false
+---
+
 # statscan-mcp
 
 An [MCP](https://modelcontextprotocol.io/) server that lets AI agents query Statistics Canada's live data. Connect it to Claude Desktop, Cursor, or any MCP-compatible client and ask questions about Canadian economic indicators — the agent discovers datasets, pulls time series, and cites sources automatically.

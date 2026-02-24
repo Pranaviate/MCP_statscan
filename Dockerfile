@@ -10,7 +10,7 @@ RUN uv sync --no-dev --frozen
 COPY statscan_mcp/ statscan_mcp/
 
 ENV TRANSPORT=http
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=7860
+EXPOSE 7860
 
 CMD ["uv", "run", "python", "-m", "statscan_mcp"]
