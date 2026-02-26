@@ -1,5 +1,5 @@
 ---
-title: Statscan Mcp Server
+title: StatsCan MCP Server
 emoji: 📊
 colorFrom: red
 colorTo: blue
@@ -15,7 +15,7 @@ Covers the full [Web Data Service (WDS)](https://www.statcan.gc.ca/en/developers
 
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
 ![MIT License](https://img.shields.io/badge/license-MIT-green)
-[![Smithery](https://smithery.ai/badge/statscan-mcp)](https://smithery.ai/server/statscan-mcp)
+[![Smithery](https://smithery.ai/badge/pranaviate/statscan-mcp)](https://smithery.ai/server/pranaviate/statscan-mcp)
 
 ## What's Inside
 
@@ -71,12 +71,12 @@ uv run statscan-mcp
 ```bash
 set TRANSPORT=http
 uv run python -m statscan_mcp
-# Server starts on http://localhost:8080
+# Server starts on http://localhost:7860
 ```
 
 ### Smithery.ai
 
-Install via [Smithery](https://smithery.ai/server/statscan-mcp) for one-click setup with Claude Desktop, Cursor, or any MCP client.
+Install via [Smithery](https://smithery.ai/server/pranaviate/statscan-mcp) for one-click setup with Claude Desktop, Cursor, or any MCP client.
 
 ### Claude Desktop
 
