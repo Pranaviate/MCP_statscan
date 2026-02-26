@@ -104,23 +104,24 @@ def main():
     transport = os.environ.get("TRANSPORT", "stdio")
 
     if transport == "http":
-        from starlette.applications import Starlette
         from starlette.middleware.cors import CORSMiddleware
         from starlette.responses import HTMLResponse
-        from starlette.routing import Mount, Route
 
-        async def homepage(request):
-            return HTMLResponse(HTML)
+        class _HomepageMiddleware:
+            def __init__(self, app):
+                self.app = app
+
+            async def __call__(self, scope, receive, send):
+                if scope["type"] == "http" and scope["path"] == "/":
+                    response = HTMLResponse(HTML)
+                    await response(scope, receive, send)
+                else:
+                    await self.app(scope, receive, send)
 
         mcp_asgi = mcp.streamable_http_app()
 
-        app = Starlette(routes=[
-            Route("/", homepage),
-            Mount("/", app=mcp_asgi),
-        ])
-
-        app.add_middleware(
-            CORSMiddleware,
+        app = CORSMiddleware(
+            _HomepageMiddleware(mcp_asgi),
             allow_origins=["*"],
             allow_methods=["*"],
             allow_headers=["*"],
