@@ -1,6 +1,6 @@
-runtime: container
 startCommand:
   type: http
+  url: https://pranaviate-statscan-mcp.hf.space/mcp
   configSchema:
     type: object
     properties: {}
