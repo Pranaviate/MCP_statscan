@@ -54,43 +54,101 @@ Covers the full [Web Data Service (WDS)](https://www.statcan.gc.ca/en/developers
 | `get_changed_vector_data` | Changed data by vector |
 | `get_changed_series_data` | Changed data by coordinates |
 
-## Usage
+## Connect
 
-### Local Development (stdio)
+MCP endpoint: `https://pranaviate-statscan-mcp.hf.space/mcp`
 
-```bash
-# Run with MCP Inspector
-uv run mcp dev statscan_mcp/server.py
+### One-click via Smithery
 
-# Or run directly
-uv run statscan-mcp
-```
+[![Smithery](https://smithery.ai/badge/pranaviate/statscan-mcp)](https://smithery.ai/server/pranaviate/statscan-mcp)
 
-### HTTP Transport
+Visit **[smithery.ai/server/pranaviate/statscan-mcp](https://smithery.ai/server/pranaviate/statscan-mcp)** and click Install next to your client.
 
-```bash
-set TRANSPORT=http
-uv run python -m statscan_mcp
-# Server starts on http://localhost:7860
-```
-
-### Smithery.ai
-
-Install via [Smithery](https://smithery.ai/server/pranaviate/statscan-mcp) for one-click setup with Claude Desktop, Cursor, or any MCP client.
+---
 
 ### Claude Desktop
 
-Add to your `claude_desktop_config.json`:
+Settings → Connectors → Add MCP Server → paste the endpoint URL above.
+
+---
+
+### Cursor
+
+Add to `.cursor/mcp.json` in your project root (or `~/.cursor/mcp.json` for global):
 
 ```json
 {
   "mcpServers": {
     "statscan": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/MCP_statscan", "statscan-mcp"]
+      "url": "https://pranaviate-statscan-mcp.hf.space/mcp"
     }
   }
 }
+```
+
+---
+
+### Windsurf
+
+Add to `~/.codeium/windsurf/mcp_config.json` (macOS/Linux) or `%USERPROFILE%\.codeium\windsurf\mcp_config.json` (Windows):
+
+```json
+{
+  "mcpServers": {
+    "statscan": {
+      "url": "https://pranaviate-statscan-mcp.hf.space/mcp"
+    }
+  }
+}
+```
+
+---
+
+### Cline (VS Code)
+
+MCP Servers panel → Configure MCP Servers → add to `cline_mcp_settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "statscan": {
+      "url": "https://pranaviate-statscan-mcp.hf.space/mcp",
+      "type": "streamableHttp"
+    }
+  }
+}
+```
+
+---
+
+### VS Code + GitHub Copilot
+
+Open Command Palette → `MCP: Open User Configuration` → add to `mcp.json`:
+
+```json
+{
+  "servers": {
+    "statscan": {
+      "type": "http",
+      "url": "https://pranaviate-statscan-mcp.hf.space/mcp"
+    }
+  }
+}
+```
+
+Requires VS Code 1.99+.
+
+---
+
+## Local Development
+
+```bash
+# MCP Inspector (stdio)
+uv run mcp dev statscan_mcp/server.py
+
+# HTTP transport
+set TRANSPORT=http && uv run python -m statscan_mcp
+# Server starts on http://localhost:7860
 ```
 
 ## License
