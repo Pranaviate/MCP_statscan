@@ -7,6 +7,7 @@ HTML = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Unofficial MCP server for Statistics Canada's Web Data Service. Access 7,000+ datasets via 15 tools covering discovery, data retrieval, and change tracking.">
   <title>StatsCan MCP Server</title>
   <style>
     body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; color: #222; }
