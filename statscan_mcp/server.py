@@ -1,8 +1,9 @@
 from mcp.server.fastmcp import FastMCP
 
+from statscan_mcp import __version__
 from statscan_mcp.config import settings
 
-HTML = """<!DOCTYPE html>
+HTML = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -62,7 +63,7 @@ HTML = """<!DOCTYPE html>
     <a href="https://www.statcan.gc.ca/en/developers/wds">StatsCan WDS Docs</a>
   </div>
 
-  <footer>Built with Python + FastMCP &middot; Data from Statistics Canada WDS API</footer>
+  <footer>v{__version__} &middot; Built with Python + FastMCP &middot; Data from Statistics Canada WDS API</footer>
 </body>
 </html>"""
 
