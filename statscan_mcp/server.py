@@ -1,6 +1,6 @@
-import os
-
 from mcp.server.fastmcp import FastMCP
+
+from statscan_mcp.config import settings
 
 HTML = """<!DOCTYPE html>
 <html lang="en">
@@ -102,9 +102,7 @@ mcp.tool()(get_full_table_csv)
 mcp.tool()(get_full_table_sdmx)
 
 def main():
-    transport = os.environ.get("TRANSPORT", "stdio")
-
-    if transport == "http":
+    if settings.transport == "http":
         from starlette.middleware.cors import CORSMiddleware
         from starlette.responses import HTMLResponse
 
@@ -131,7 +129,6 @@ def main():
 
         import uvicorn
 
-        port = int(os.environ.get("PORT", 7860))
-        uvicorn.run(app, host="0.0.0.0", port=port)
+        uvicorn.run(app, host="0.0.0.0", port=settings.port)
     else:
         mcp.run()
