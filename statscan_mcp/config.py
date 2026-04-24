@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    # HTTP transport settings
+    # Transport mode: "stdio" (local dev) or "http" (deployed)
     transport: str = "stdio"
     port: int = 7860
 
