@@ -11,18 +11,18 @@ HTML = f"""<!DOCTYPE html>
   <meta name="description" content="Unofficial MCP server for Statistics Canada's Web Data Service. Access 7,000+ datasets via 15 tools covering discovery, data retrieval, and change tracking.">
   <title>StatsCan MCP Server</title>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; color: #222; }
-    h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
-    h2 { margin-top: 2rem; }
-    .subtitle { color: #555; margin-bottom: 2rem; }
-    .endpoint { background: #f4f4f4; border: 1px solid #ddd; border-radius: 6px; padding: 0.75rem 1rem; font-family: monospace; font-size: 0.95rem; }
-    table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
-    th { text-align: left; padding: 0.5rem; border-bottom: 2px solid #ddd; color: #444; }
-    td { padding: 0.5rem; border-bottom: 1px solid #eee; vertical-align: top; }
-    td:first-child { font-family: monospace; color: #0066cc; white-space: nowrap; padding-right: 1.5rem; }
-    .links { margin-top: 2rem; display: flex; gap: 1.5rem; }
-    a { color: #0066cc; }
-    footer { margin-top: 3rem; color: #888; font-size: 0.85rem; border-top: 1px solid #eee; padding-top: 1rem; }
+    body {{ font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; color: #222; }}
+    h1 {{ font-size: 1.8rem; margin-bottom: 0.25rem; }}
+    h2 {{ margin-top: 2rem; }}
+    .subtitle {{ color: #555; margin-bottom: 2rem; }}
+    .endpoint {{ background: #f4f4f4; border: 1px solid #ddd; border-radius: 6px; padding: 0.75rem 1rem; font-family: monospace; font-size: 0.95rem; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 0.75rem; }}
+    th {{ text-align: left; padding: 0.5rem; border-bottom: 2px solid #ddd; color: #444; }}
+    td {{ padding: 0.5rem; border-bottom: 1px solid #eee; vertical-align: top; }}
+    td:first-child {{ font-family: monospace; color: #0066cc; white-space: nowrap; padding-right: 1.5rem; }}
+    .links {{ margin-top: 2rem; display: flex; gap: 1.5rem; }}
+    a {{ color: #0066cc; }}
+    footer {{ margin-top: 3rem; color: #888; font-size: 0.85rem; border-top: 1px solid #eee; padding-top: 1rem; }}
   </style>
 </head>
 <body>
