@@ -31,14 +31,8 @@ HTML = """<!DOCTYPE html>
     Search and retrieve economic, demographic, and social data from ~7,000 StatsCan datasets.
   </p>
 
-  <h2>Endpoints</h2>
-  <table>
-    <thead><tr><th>Path</th><th>Description</th></tr></thead>
-    <tbody>
-      <tr><td>/mcp</td><td>MCP protocol endpoint</td></tr>
-      <tr><td>/health</td><td>Health check — returns {"status": "ok"}</td></tr>
-    </tbody>
-  </table>
+  <h2>MCP Endpoint</h2>
+  <div class="endpoint">https://pranaviate-statscan-mcp.hf.space/mcp</div>
 
   <h2>15 Available Tools</h2>
   <table>
