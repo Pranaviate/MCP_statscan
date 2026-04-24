@@ -57,7 +57,7 @@ HTML = """<!DOCTYPE html>
 
   <div class="links">
     <a href="https://github.com/Pranaviate/MCP_statscan">GitHub</a>
-    <a href="https://smithery.ai/server/statscan-mcp">Smithery</a>
+    <a href="https://smithery.ai/server/pranaviate/statscan-mcp">Smithery</a>
     <a href="https://www.statcan.gc.ca/en/developers/wds">StatsCan WDS Docs</a>
   </div>
 
