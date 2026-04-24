@@ -1,3 +1,5 @@
+import logging
+
 from pydantic_settings import BaseSettings
 
 
@@ -12,5 +14,14 @@ class Settings(BaseSettings):
     timeout_write: float = 5.0
     timeout_pool: float = 5.0
 
+    # Logging level: "DEBUG", "INFO", "WARNING", "ERROR"
+    log_level: str = "INFO"
+
 
 settings = Settings()
+
+logging.basicConfig(
+    level=settings.log_level,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
