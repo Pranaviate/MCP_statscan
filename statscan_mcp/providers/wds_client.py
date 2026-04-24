@@ -1,7 +1,12 @@
+import logging
+import time
+
 import httpx
 from typing import Optional
 
 from statscan_mcp.config import settings
+
+logger = logging.getLogger(__name__)
 
 
 class WDSClient:
@@ -18,15 +23,17 @@ class WDSClient:
         )
 
     async def _request(self, method: str, endpoint: str, params: Optional[dict] = None, body=None) -> dict:
+        url = f"{self.BASE_URL}/{endpoint}"
+        logger.info("%s %s", method, url)
+        start = time.monotonic()
         try:
-            response = await self.client.request(
-                method,
-                f"{self.BASE_URL}/{endpoint}",
-                params=params,
-                json=body
-            )
+            response = await self.client.request(method, url, params=params, json=body)
+            duration = time.monotonic() - start
+            logger.info("%s %s → %d (%.2fs)", method, endpoint, response.status_code, duration)
             return response.json()
         except Exception as e:
+            duration = time.monotonic() - start
+            logger.error("%s %s failed after %.2fs: %s", method, endpoint, duration, e)
             return {
                 "error": str(e),
                 "hint": f"Failed to fetch {endpoint} from StatsCan API"
