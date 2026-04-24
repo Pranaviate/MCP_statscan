@@ -55,7 +55,13 @@ Covers the full [Web Data Service (WDS)](https://www.statcan.gc.ca/en/developers
 | `get_changed_vector_data` | Changed data by vector |
 | `get_changed_series_data` | Changed data by coordinates |
 
-## Connect
+## Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `/mcp` | MCP protocol endpoint |
+| `/health` | Health check — returns `{"status": "ok"}` |
+| `/` | This landing page |
 
 MCP endpoint: `https://pranaviate-statscan-mcp.hf.space/mcp`
 
