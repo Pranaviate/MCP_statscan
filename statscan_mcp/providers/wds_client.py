@@ -1,12 +1,21 @@
 import httpx
 from typing import Optional
 
+from statscan_mcp.config import settings
+
 
 class WDSClient:
     BASE_URL = "https://www150.statcan.gc.ca/t1/wds/rest"
 
     def __init__(self):
-        self.client = httpx.AsyncClient()
+        self.client = httpx.AsyncClient(
+            timeout=httpx.Timeout(
+                connect=settings.timeout_connect,
+                read=settings.timeout_read,
+                write=settings.timeout_write,
+                pool=settings.timeout_pool,
+            )
+        )
 
     async def _request(self, method: str, endpoint: str, params: Optional[dict] = None, body=None) -> dict:
         try:
