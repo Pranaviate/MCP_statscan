@@ -104,7 +104,7 @@ mcp.tool()(get_full_table_sdmx)
 def main():
     if settings.transport == "http":
         from starlette.middleware.cors import CORSMiddleware
-        from starlette.responses import HTMLResponse
+        from starlette.responses import HTMLResponse, JSONResponse
 
         class _HomepageMiddleware:
             def __init__(self, app):
@@ -113,6 +113,9 @@ def main():
             async def __call__(self, scope, receive, send):
                 if scope["type"] == "http" and scope["path"] == "/":
                     response = HTMLResponse(HTML)
+                    await response(scope, receive, send)
+                elif scope["type"] == "http" and scope["path"] == "/health":
+                    response = JSONResponse({"status": "ok"})
                     await response(scope, receive, send)
                 else:
                     await self.app(scope, receive, send)
