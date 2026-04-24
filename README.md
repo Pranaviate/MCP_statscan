@@ -23,7 +23,7 @@ Covers the full [Web Data Service (WDS)](https://www.statcan.gc.ca/en/developers
 - **Shared API client** (`WDSClient`) — centralized HTTP logic, connection reuse, error handling in one place
 - **Dual transport** — runs locally via stdio or remotely via Streamable HTTP (one env var to switch)
 - **Docker-ready** — `Dockerfile` + `smithery.yaml` for one-click deployment on Smithery.ai
-- **Tested** — 16 unit tests with mocked HTTP, no live API calls, runs in under 3 seconds
+- **Tested** — 18 unit tests with mocked HTTP, no live API calls, runs in under 3 seconds
 - **Production-ready** — structured logging, retry logic with exponential backoff, configurable timeouts, `/health` endpoint
 
 ## Tools
